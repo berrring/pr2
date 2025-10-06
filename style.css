@@ -1,0 +1,626 @@
+/* Переменные темы: :root — тёмная по умолчанию. [data-theme="light"] — светлая (JS меняет data-theme в <html>). */
+:root {
+  /* Dark Theme (Default) */
+  --bg: #0B0E11;
+  --bg-secondary: #151B23;
+  --card: #1A2128;
+  --surface: #242B35;
+  --text-primary: #FFFFFF;
+  --text-secondary: #94A3B8;
+  --accent: #06B6D4;      /* Основной синий — для кнопок, ссылок. */
+  --accent-hover: #0891B2; /* Hover-синий: темнее для контраста. */
+  --border: rgba(148, 163, 184, 0.1);
+}
+
+/* Light Theme: Переопределяет переменные при data-theme="light". */
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --card: #FFFFFF;
+  --surface: #F1F5F9;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --accent: #0891B2;
+  --accent-hover: #06B6D4;
+  --border: rgba(15, 23, 42, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* Плавная прокрутка к #id (из nav). */
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg); /* Фон меняется с темой. */
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Плавная смена темы (0.3 сек). */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Header: position: fixed — прилипает сверху. z-index: 1000 — поверх всего. */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Theme Toggle: Круглая кнопка. Hover: синяя рамка (border-color: var(--accent)). */
+.theme-toggle {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent); /* Hover: синий цвет (акцент). */
+}
+
+/* Mobile Menu Toggle: Скрыто на десктопе (display: none в media). Span — полоски гамбургера. */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.mobile-menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Hero: min-height: 100vh — полный экран. Background: градиент от bg к bg-secondary. */
+.hero {
+  padding: 140px 0 80px; /* Padding-top: для fixed-header. */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px; /* Две колонки: текст + фото. */
+  gap: 60px;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: clamp(36px, 8vw, 64px); /* Responsive размер: от 36px до 64px. */
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.hero-subtitle {
+  font-size: 24px;
+  color: var(--accent); /* Синий акцент. */
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.hero-description {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Button Styles: Flex для ряд/столбец. min-width: 160px — не сжимаются. */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease; /* Плавный hover (фон, transform). */
+  min-width: 160px;
+}
+
+.btn-primary {
+  background: var(--accent); /* Синий фон. */
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover); /* Hover: темнее синий + подъём. */
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent); /* Hover: синяя рамка + цвет. */
+  color: var(--accent);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* Profile Card: Box-shadow для глубины. Transition для hover (но hover не добавлен). */
+.hero-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  overflow: hidden;
+  border: 3px solid var(--accent); /* Синяя рамка фото. */
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.profile-role {
+  color: var(--text-secondary);
+}
+
+/* Skills: Flex-wrap — теги обтекают на узком экране. */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-tag {
+  background: var(--surface);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* Sections: padding: 80px 0 — отступы между блоками. */
+.section {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: clamp(32px, 6vw, 48px); /* Responsive заголовки. */
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* About: Фон secondary. Grid: 1fr 400px — текст + стата. */
+.about {
+  background: var(--bg-secondary);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 60px;
+}
+
+.about-text {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.about-text p {
+  margin-bottom: 24px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2x2 сетка. */
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px); /* Hover: лёгкий подъём. */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent); /* Синий для чисел. */
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Projects: repeat(auto-fit, minmax(320px, 1fr)) — колонки подстраиваются под ширину. */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+}
+
+.project-card {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px); /* Hover: подъём + большая тень. */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 24px;
+}
+
+.project-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.project-description {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tech-tag {
+  background: var(--surface);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.project-links {
+  display: flex;
+  gap: 16px;
+}
+
+.project-link {
+  color: var(--accent); /* Синий цвет ссылок. */
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.project-link:hover {
+  color: var(--accent-hover); /* Hover: темнее синий. */
+}
+
+/* Contact: Фон secondary. Форма: border с акцентом на focus (input:focus). */
+.contact {
+  background: var(--bg-secondary);
+}
+
+.contact-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contact-form {
+  background: var(--card);
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent); /* Focus: синяя рамка (UX: видно, где ты). */
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-status {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+  display: none; /* По умолчанию скрыто (JS показывает). */
+}
+
+.form-status.success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10B981;
+  border: 1px solid #10B981;
+  display: block;
+}
+
+.form-status.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+  border: 1px solid #EF4444;
+  display: block;
+}
+
+/* Footer: Border-top — разделитель. Flex column для мобильного. */
+.footer {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: var(--accent); /* Hover: синий фон + подъём. */
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Mobile Responsive: @media — меняет layout на экранах <968px (планшет) и <480px (телефон). */
+@media (max-width: 968px) {
+  .hero-grid, .about-grid {
+    grid-template-columns: 1fr; /* Одна колонка на мобиле. */
+    gap: 40px;
+  }
+  
+  .hero-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .nav {
+    display: none; /* Прячем десктоп-меню. */
+  }
+  
+  .mobile-menu-toggle {
+    display: flex; /* Показываем гамбургер. */
+  }
+  
+  .hero {
+    padding: 120px 0 60px;
+  }
+  
+  /* Fix for mobile buttons: Столбец, 100% ширины. */
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .btn {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .projects-grid, .stats-grid {
+    grid-template-columns: 1fr; /* Одна карточка/стата в ряд. */
+  }
+  
+  .contact-form {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px; /* Меньше отступов на телефоне. */
+  }
+  
+  .header-content {
+    height: 70px;
+  }
+  
+  .section {
+    padding: 60px 0;
+  }
+  
+  .section-title {
+    margin-bottom: 40px;
+  }
+}
+
+/* Mobile Menu: position: fixed — как модалка. JS добавляет 'active' для display: flex. */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 24px;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav.active {
+  display: flex;
+}

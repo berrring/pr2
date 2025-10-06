@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Aziret Rahmanov - Java Backend Developer Portfolio" />
+  <title>Aziret Rahmanov — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header: Фиксированная шапка (position: fixed в CSS) — всегда видна при скролле. ID для JS-хуков (тема, меню). -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">Rahmanov</a>
+        <div class="header-right">
+          <!-- Кнопка темы: ID="themeToggle" — JS меняет иконки и атрибут data-theme в <html>. -->
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <svg id="sunIcon" viewBox="0 0 24 24" style="display: none;">
+              <!-- Иконка солнца: Показывается в светлой теме (JS меняет display). -->
+              <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/>
+            </svg>
+            <svg id="moonIcon" viewBox="0 0 24 24">
+              <!-- Иконка луны: Показывается в тёмной теме (по умолчанию). -->
+              <path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/>
+            </svg>
+          </button>
+          <nav class="nav">
+            <!-- Навигация: href="#id" — плавная прокрутка к разделам (CSS: scroll-behavior: smooth). На мобиле прячется. -->
+            <a href="#about" class="nav-link">About</a>
+            <a href="#portfolio" class="nav-link">Portfolio</a>
+            <a href="#contact" class="nav-link">Contact</a>
+          </nav>
+          <!-- Кнопка гамбургера: ID="mobileMenuToggle" — JS toggles класс 'active' для мобильного меню. -->
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Мобильное меню: Скрыто по умолчанию (CSS: display: none). JS добавляет 'active' для показа. -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#about" class="nav-link">About Me</a>
+    <a href="#portfolio" class="nav-link">Portfolio</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </nav>
+
+  <!-- Hero: Главный экран. Grid для двух колонок (CSS: grid-template-columns: 1fr 400px). На мобиле — 1 колонка. -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <h1>Aziret Rahmanov</h1>
+          <div class="hero-subtitle">Java Backend Developer</div>
+          <p class="hero-description">
+            Creating reliable backend solutions with Java and Spring Boot. 
+            I strive to write clean, readable code and constantly develop in web development.
+          </p>
+          <div class="hero-buttons">
+            <!-- Кнопки: Класс "btn-primary" — синий фон (CSS: background: var(--accent)). Hover: темнее + подъём. -->
+            <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            <a href="#portfolio" class="btn btn-secondary">View Projects</a>
+          </div>
+          <!-- Навыки: Flex-wrap для тегов — обтекают на мобиле. -->
+          <div class="skills">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML/CSS</span>
+          </div>
+        </div>
+        <!-- Карточка профиля: Border с акцентом (CSS: border: 3px solid var(--accent)). -->
+        <div class="hero-image">
+          <div class="hero-card">
+            <div class="profile-image">
+              <img src="images/profile_photo.jpg" alt="Aziret Rahmanov">
+            </div>
+            <div class="profile-name">Aziret Rahmanov</div>
+            <div class="profile-role">Backend Developer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About: Фон var(--bg-secondary). Grid: текст + 2x2 статистика. -->
+  <section id="about" class="section about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I am a beginner Java backend developer with a passion for creating efficient and scalable solutions. I study modern technologies and best practices of software development.</p>
+          <p>Focused on learning the Spring Framework, working with databases and creating RESTful APIs. Actively developing in the direction of DevOps and automation.</p>
+          <p>I learn quickly, love solving complex problems and am ready for teamwork on interesting projects. Currently expanding my skills in frontend development.</p>
+        </div>
+        <!-- Статистика: Grid 1fr 1fr. Hover: подъём (CSS: transform: translateY(-4px)). -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">8</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2025</div>
+            <div class="stat-label">Started</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Dedication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio: ID="portfolio". Grid: auto-fit — адаптируется (3 на десктопе, 1 на мобиле). -->
+  <section id="portfolio" class="section">
+    <div class="container">
+      <h2 class="section-title">My Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <!-- Карточка проекта: Hover — подъём + тень (CSS: transform: translateY(-8px)). -->
+          <div class="project-image">
+            <img src="https://via.placeholder.com/600x300/06B6D4/ffffff?text=Task+Management" alt="Task Management API">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Task Management API</h3>
+            <p class="project-description">RESTful API for task management with JWT authentication and PostgreSQL integration.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Spring Boot</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">JWT</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">GitHub</a>
+              <a href="#" class="project-link">Demo</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/600x300/10B981/ffffff?text=E-commerce" alt="E-commerce Backend">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">E-commerce Backend</h3>
+            <p class="project-description">Microservice architecture for online store with user, product and order services.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Spring Cloud</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Redis</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">GitHub</a>
+              <a href="#" class="project-link">Docs</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-image">
+            <img src="https://via.placeholder.com/600x300/0891B2/ffffff?text=Blog+API" alt="Blog API">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Personal Blog API</h3>
+            <p class="project-description">REST API for a blogging platform with authentication and content management.</p>
+            <div class="project-tech">
+              <span class="tech-tag">Spring Boot</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">JWT</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">GitHub</a>
+              <a href="#" class="project-link">Demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact: ID="contactForm" — JS перехватывает submit. required — базовая HTML-валидация. -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-wrapper">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required placeholder="Project Inquiry">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+          <!-- Статус формы: JS меняет текст/класс (success/error) и display. -->
+          <div class="form-status" id="formStatus"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer: Простой, с flex для центрирования. SVG-иконки — inline для кастомизации. -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <p>&copy; 2025 Aziret Rahmanov. All rights reserved.</p>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/yourprofile" class="social-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <!-- Добавь другие соцсети аналогично. -->
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Подключение JS: Выполняется в конце, чтобы DOM загрузился. -->
+  <script src="script.js"></script>
+</body>
+</html>
