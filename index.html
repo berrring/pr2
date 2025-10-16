@@ -9,13 +9,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
 </head>
 <body>
+  <!-- Greeting Block -->
   <div class="greeting-block" id="greetingBlock">
     <div class="greeting-content">
       <span id="greeting"></span>
       <button id="askName" class="btn btn-secondary">Ввести имя</button>
     </div>
   </div>
+
+  <!-- Main Content -->
   <div id="mainContent" style="display:none;">
+    <!-- Header -->
     <header class="header">
       <div class="container">
         <div class="header-content">
@@ -39,11 +43,15 @@
         </div>
       </div>
     </header>
+
+    <!-- Mobile Nav -->
     <nav class="mobile-nav" id="mobileNav">
       <a href="#about" class="nav-link">About Me</a>
       <a href="#portfolio" class="nav-link">Portfolio</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
+
+    <!-- Hero Section -->
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
@@ -81,6 +89,8 @@
         </div>
       </div>
     </section>
+
+    <!-- About Section -->
     <section id="about" class="section about">
       <div class="container">
         <h2 class="section-title">About Me</h2>
@@ -111,13 +121,15 @@
         </div>
       </div>
     </section>
+
+    <!-- Portfolio Section -->
     <section id="portfolio" class="section">
       <div class="container">
         <h2 class="section-title">My Projects</h2>
         <div class="projects-grid">
           <article class="project-card">
             <div class="project-image">
-              <img src="https://via.placeholder.com/600x300/06B6D4/ffffff?text=Task+Management" alt="Task Management API">
+              <img src="images/firstproject_photo.png" alt="Task Management API">
             </div>
             <div class="project-content">
               <h3 class="project-title">Task Management API</h3>
@@ -128,13 +140,13 @@
                 <span class="tech-tag">JWT</span>
               </div>
               <div class="project-links">
-                <a href="#" class="project-link">GitHub</a>
+                <a href="https://github.com/berrring/TM_1" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
               </div>
             </div>
           </article>
           <article class="project-card">
             <div class="project-image">
-              <img src="https://via.placeholder.com/600x300/10B981/ffffff?text=E-commerce" alt="E-commerce Backend">
+              <img src="images/secondproject_photo.png" alt="E-commerce Backend">
             </div>
             <div class="project-content">
               <h3 class="project-title">E-commerce Backend</h3>
@@ -145,13 +157,13 @@
                 <span class="tech-tag">Redis</span>
               </div>
               <div class="project-links">
-                <a href="#" class="project-link">GitHub</a>
+                <a href="https://github.com/berrring/E_M1" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
               </div>
             </div>
           </article>
           <article class="project-card">
             <div class="project-image">
-              <img src="https://via.placeholder.com/600x300/0891B2/ffffff?text=Blog+API" alt="Blog API">
+              <img src="images/thirdproject_photo.png" alt="Blog API">
             </div>
             <div class="project-content">
               <h3 class="project-title">Personal Blog API</h3>
@@ -162,13 +174,15 @@
                 <span class="tech-tag">JWT</span>
               </div>
               <div class="project-links">
-                <a href="#" class="project-link">GitHub</a>
+                <a href="https://github.com/berrring/B_P" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
               </div>
             </div>
           </article>
         </div>
       </div>
     </section>
+
+    <!-- Contact Section -->
     <section id="contact" class="section contact">
       <div class="container">
         <h2 class="section-title">Get In Touch</h2>
@@ -196,6 +210,8 @@
         </div>
       </div>
     </section>
+
+    <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer-content">
@@ -214,10 +230,8 @@
       </div>
     </footer>
   </div>
-  <script src="script.js"></script>
-</body>
-</html>
-  <!-- Подключение JS: Выполняется в конце, чтобы DOM загрузился. -->
+
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>

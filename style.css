@@ -5,8 +5,8 @@
   --surface: #242B35;
   --text-primary: #FFFFFF;
   --text-secondary: #94A3B8;
-  --accent: #06B6D4;
-  --accent-hover: #0891B2;
+  --accent: #D97706;
+  --accent-hover: #B45309;
   --border: rgba(148, 163, 184, 0.1);
 }
 
@@ -17,8 +17,8 @@
   --surface: #F1F5F9;
   --text-primary: #0F172A;
   --text-secondary: #475569;
-  --accent: #0891B2;
-  --accent-hover: #06B6D4;
+  --accent: #D97706;
+  --accent-hover: #B45309;
   --border: rgba(15, 23, 42, 0.1);
 }
 
