@@ -1,18 +1,15 @@
-/* Переменные темы: :root — тёмная по умолчанию. [data-theme="light"] — светлая (JS меняет data-theme в <html>). */
 :root {
-  /* Dark Theme (Default) */
   --bg: #0B0E11;
   --bg-secondary: #151B23;
   --card: #1A2128;
   --surface: #242B35;
   --text-primary: #FFFFFF;
   --text-secondary: #94A3B8;
-  --accent: #06B6D4;      /* Основной синий — для кнопок, ссылок. */
-  --accent-hover: #0891B2; /* Hover-синий: темнее для контраста. */
+  --accent: #06B6D4;
+  --accent-hover: #0891B2;
   --border: rgba(148, 163, 184, 0.1);
 }
 
-/* Light Theme: Переопределяет переменные при data-theme="light". */
 [data-theme="light"] {
   --bg: #FFFFFF;
   --bg-secondary: #F8FAFC;
@@ -32,15 +29,15 @@
 }
 
 html {
-  scroll-behavior: smooth; /* Плавная прокрутка к #id (из nav). */
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Inter", system-ui, sans-serif;
-  background: var(--bg); /* Фон меняется с темой. */
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
   color: var(--text-primary);
   line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Плавная смена темы (0.3 сек). */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -49,7 +46,43 @@ body {
   padding: 0 24px;
 }
 
-/* Header: position: fixed — прилипает сверху. z-index: 1000 — поверх всего. */
+.greeting-block {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg);
+  transition: opacity 0.6s ease;
+}
+
+.greeting-block.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.greeting-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  gap: 16px;
+  background: var(--card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 32px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  max-width: 90vw;
+  text-align: center;
+}
+
+.greeting-content span {
+  font-weight: 500;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -81,7 +114,6 @@ body {
   gap: 24px;
 }
 
-/* Theme Toggle: Круглая кнопка. Hover: синяя рамка (border-color: var(--accent)). */
 .theme-toggle {
   background: var(--surface);
   border: 2px solid var(--border);
@@ -99,10 +131,14 @@ body {
   border-color: var(--accent);
 }
 
-.theme-toggle svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--text-primary);
+.theme-toggle i {
+  font-size: 24px;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover i {
+  color: var(--accent);
 }
 
 .nav {
@@ -119,10 +155,9 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--accent); /* Hover: синий цвет (акцент). */
+  color: var(--accent);
 }
 
-/* Mobile Menu Toggle: Скрыто на десктопе (display: none в media). Span — полоски гамбургера. */
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -140,9 +175,8 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Hero: min-height: 100vh — полный экран. Background: градиент от bg к bg-secondary. */
 .hero {
-  padding: 140px 0 80px; /* Padding-top: для fixed-header. */
+  padding: 140px 0 80px;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -151,13 +185,13 @@ body {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 400px; /* Две колонки: текст + фото. */
+  grid-template-columns: 1fr 400px;
   gap: 60px;
   align-items: center;
 }
 
 .hero-content h1 {
-  font-size: clamp(36px, 8vw, 64px); /* Responsive размер: от 36px до 64px. */
+  font-size: clamp(36px, 8vw, 64px);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 24px;
@@ -165,7 +199,7 @@ body {
 
 .hero-subtitle {
   font-size: 24px;
-  color: var(--accent); /* Синий акцент. */
+  color: var(--accent);
   font-weight: 600;
   margin-bottom: 24px;
 }
@@ -177,7 +211,6 @@ body {
   margin-bottom: 32px;
 }
 
-/* Button Styles: Flex для ряд/столбец. min-width: 160px — не сжимаются. */
 .hero-buttons {
   display: flex;
   gap: 16px;
@@ -197,17 +230,17 @@ body {
   border: none;
   cursor: pointer;
   font-size: 16px;
-  transition: all 0.3s ease; /* Плавный hover (фон, transform). */
+  transition: all 0.3s ease;
   min-width: 160px;
 }
 
 .btn-primary {
-  background: var(--accent); /* Синий фон. */
+  background: var(--accent);
   color: white;
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover); /* Hover: темнее синий + подъём. */
+  background: var(--accent-hover);
   transform: translateY(-2px);
 }
 
@@ -218,7 +251,7 @@ body {
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent); /* Hover: синяя рамка + цвет. */
+  border-color: var(--accent);
   color: var(--accent);
 }
 
@@ -226,7 +259,6 @@ body {
   width: 100%;
 }
 
-/* Profile Card: Box-shadow для глубины. Transition для hover (но hover не добавлен). */
 .hero-card {
   background: var(--card);
   border-radius: 16px;
@@ -243,7 +275,7 @@ body {
   border-radius: 50%;
   margin: 0 auto 24px;
   overflow: hidden;
-  border: 3px solid var(--accent); /* Синяя рамка фото. */
+  border: 3px solid var(--accent);
 }
 
 .profile-image img {
@@ -262,7 +294,6 @@ body {
   color: var(--text-secondary);
 }
 
-/* Skills: Flex-wrap — теги обтекают на узком экране. */
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -279,19 +310,17 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Sections: padding: 80px 0 — отступы между блоками. */
 .section {
   padding: 80px 0;
 }
 
 .section-title {
-  font-size: clamp(32px, 6vw, 48px); /* Responsive заголовки. */
+  font-size: clamp(32px, 6vw, 48px);
   font-weight: 800;
   text-align: center;
   margin-bottom: 60px;
 }
 
-/* About: Фон secondary. Grid: 1fr 400px — текст + стата. */
 .about {
   background: var(--bg-secondary);
 }
@@ -314,7 +343,7 @@ body {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2x2 сетка. */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
@@ -328,14 +357,14 @@ body {
 }
 
 .stat-card:hover {
-  transform: translateY(-4px); /* Hover: лёгкий подъём. */
+  transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .stat-number {
   font-size: 36px;
   font-weight: 800;
-  color: var(--accent); /* Синий для чисел. */
+  color: var(--accent);
   margin-bottom: 8px;
 }
 
@@ -344,7 +373,6 @@ body {
   font-size: 14px;
 }
 
-/* Projects: repeat(auto-fit, minmax(320px, 1fr)) — колонки подстраиваются под ширину. */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -360,7 +388,7 @@ body {
 }
 
 .project-card:hover {
-  transform: translateY(-8px); /* Hover: подъём + большая тень. */
+  transform: translateY(-8px);
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -383,12 +411,14 @@ body {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 .project-description {
   color: var(--text-secondary);
   margin-bottom: 20px;
   line-height: 1.6;
+  text-align: center;
 }
 
 .project-tech {
@@ -410,20 +440,20 @@ body {
 .project-links {
   display: flex;
   gap: 16px;
+  justify-content: center;
 }
 
 .project-link {
-  color: var(--accent); /* Синий цвет ссылок. */
+  color: var(--accent);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .project-link:hover {
-  color: var(--accent-hover); /* Hover: темнее синий. */
+  color: var(--accent-hover);
 }
 
-/* Contact: Фон secondary. Форма: border с акцентом на focus (input:focus). */
 .contact {
   background: var(--bg-secondary);
 }
@@ -466,7 +496,7 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--accent); /* Focus: синяя рамка (UX: видно, где ты). */
+  border-color: var(--accent);
 }
 
 .form-group textarea {
@@ -480,7 +510,7 @@ body {
   border-radius: 12px;
   text-align: center;
   font-weight: 500;
-  display: none; /* По умолчанию скрыто (JS показывает). */
+  display: none;
 }
 
 .form-status.success {
@@ -497,7 +527,6 @@ body {
   display: block;
 }
 
-/* Footer: Border-top — разделитель. Flex column для мобильного. */
 .footer {
   padding: 40px 0;
   text-align: center;
@@ -532,20 +561,24 @@ body {
 }
 
 .social-link:hover {
-  background: var(--accent); /* Hover: синий фон + подъём. */
+  background: var(--accent);
   border-color: var(--accent);
   transform: translateY(-2px);
 }
 
-.social-link svg {
-  width: 20px;
-  height: 20px;
+.social-link i {
+  font-size: 20px;
+  color: inherit;
+  transition: color 0.3s ease;
 }
 
-/* Mobile Responsive: @media — меняет layout на экранах <968px (планшет) и <480px (телефон). */
+.social-link:hover i {
+  color: white;
+}
+
 @media (max-width: 968px) {
   .hero-grid, .about-grid {
-    grid-template-columns: 1fr; /* Одна колонка на мобиле. */
+    grid-template-columns: 1fr;
     gap: 40px;
   }
   
@@ -555,18 +588,17 @@ body {
   }
   
   .nav {
-    display: none; /* Прячем десктоп-меню. */
+    display: none;
   }
   
   .mobile-menu-toggle {
-    display: flex; /* Показываем гамбургер. */
+    display: flex;
   }
   
   .hero {
     padding: 120px 0 60px;
   }
   
-  /* Fix for mobile buttons: Столбец, 100% ширины. */
   .hero-buttons {
     display: flex;
     flex-direction: column;
@@ -580,7 +612,7 @@ body {
   }
   
   .projects-grid, .stats-grid {
-    grid-template-columns: 1fr; /* Одна карточка/стата в ряд. */
+    grid-template-columns: 1fr;
   }
   
   .contact-form {
@@ -590,7 +622,7 @@ body {
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 16px; /* Меньше отступов на телефоне. */
+    padding: 0 16px;
   }
   
   .header-content {
@@ -604,9 +636,15 @@ body {
   .section-title {
     margin-bottom: 40px;
   }
+  
+  .greeting-content {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 24px;
+    font-size: 18px;
+  }
 }
 
-/* Mobile Menu: position: fixed — как модалка. JS добавляет 'active' для display: flex. */
 .mobile-nav {
   display: none;
   position: fixed;
