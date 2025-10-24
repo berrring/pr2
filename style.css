@@ -29,7 +29,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Для нативного плавного скролла */
 }
 
 body {
@@ -259,40 +259,43 @@ body {
   width: 100%;
 }
 
-.hero-card {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 32px;
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  transition: all 0.3s ease;
+/* НОВЫЙ СТИЛЬ ДЛЯ КРУГЛОГО ФОТО */
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 
-.profile-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin: 0 auto 24px;
+.profile-card-simple {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-image-large {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%; /* <-- Делает круглым */
+  margin: 0 auto;
   overflow: hidden;
-  border: 3px solid var(--accent);
+  border: 5px solid var(--accent);
+  box-shadow: 0 0 0 10px rgba(217, 119, 6, 0.1);
+  transition: all 0.5s ease;
 }
 
-.profile-image img {
+.profile-image-large:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(217, 119, 6, 0.2);
+}
+
+.profile-image-large img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
-.profile-name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.profile-role {
-  color: var(--text-secondary);
-}
+/* КОНЕЦ НОВОГО СТИЛЯ */
 
 .skills {
   display: flex;
@@ -314,7 +317,7 @@ body {
   padding: 80px 0;
 }
 
-/* ИСПРАВЛЕНИЕ: Добавляем scroll-margin-top для фиксированного хедера */
+/* ОБЕСПЕЧИВАЕМ ОТСТУП ДЛЯ ФИКСИРОВАННОГО ХЕДЕРА */
 .section, .hero {
     scroll-margin-top: 80px; 
 }
@@ -432,6 +435,7 @@ body {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 20px;
+  justify-content: center;
 }
 
 .tech-tag {
@@ -624,9 +628,9 @@ body {
     gap: 40px;
   }
   
-  .hero-card {
-    max-width: 400px;
-    margin: 0 auto;
+  .profile-image-large {
+    width: 250px;
+    height: 250px;
   }
   
   .nav {
@@ -710,6 +714,7 @@ body {
   flex-direction: column;
   gap: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index: 999; /* Ниже хедера */
 }
 
 .mobile-nav.active {
