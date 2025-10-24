@@ -314,6 +314,12 @@ body {
   padding: 80px 0;
 }
 
+/* ИСПРАВЛЕНИЕ: Добавляем scroll-margin-top для фиксированного хедера */
+.section, .hero {
+    scroll-margin-top: 80px; 
+}
+/* КОНЕЦ ИСПРАВЛЕНИЯ */
+
 .section-title {
   font-size: clamp(32px, 6vw, 48px);
   font-weight: 800;
