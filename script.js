@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function askName() {
-    const name = prompt('Как тебя зовут?');
+    const name = prompt('What is your name?');
     if (name && name.trim()) {
       localStorage.setItem('visitorName', name.trim());
     } else {
@@ -113,19 +113,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // При открытии страницы с хэшем: УДАЛЯЕМ JS-СКРОЛЛ!
+
   window.addEventListener('load', () => {
     const { hash } = window.location;
     if (hash) {
       const target = document.querySelector(hash);
       if (target) {
-        // УДАЛЕНО: target.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-        // Браузер выполнит переход по якорю плавно благодаря CSS
+      
       }
     }
   });
 
-  // Кнопка «Наверх»
   const scrollTopBtn = document.getElementById('scrollTopBtn');
   const SHOW_AFTER = 300;
 
