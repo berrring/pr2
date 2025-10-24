@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+ddocument.addEventListener('DOMContentLoaded', function() {
   // === Переменные и элементы ===
   const themeToggle = document.getElementById('themeToggle');
   const sunIcon = document.getElementById('sunIcon');
@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const greetingBlock = document.getElementById('greetingBlock');
   const scrollTopBtn = document.getElementById('scrollTopBtn');
   
+  // ДОБАВЛЕНО: Получаем высоту хедера для смещения скролла
+  const header = document.querySelector('.header');
+  // Если хедер существует, берем его высоту, иначе используем 80px (из CSS)
+  const HEADER_OFFSET = header ? header.offsetHeight : 80;
+
+
   // === Функции и логика темы ===
 
   function updateThemeIcons() {
@@ -77,38 +83,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // === ПЛАВНЫЙ СКРОЛЛ ЧЕРЕЗ JAVASCRIPT (Ваш вариант) ===
 
+  // === ГАРАНТИРОВАННЫЙ ПЛАВНЫЙ СКРОЛЛ (window.scrollTo) ===
+
+  function smoothScrollToTarget(target) {
+      if (!target) return;
+      
+      // Вычисляем позицию: позиция элемента относительно верха документа
+      // минус высота фиксированного хедера (HEADER_OFFSET)
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+
+      window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth' 
+      });
+  }
+
+  // Обработчики для всех якорных ссылок (меню и мобильное меню)
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href');
       const target = document.querySelector(id);
       
-      if (!target || id === '#') return;
-      
-      e.preventDefault(); 
-      
-      // Плавно прокручиваем, полагаясь на CSS-свойство scroll-margin-top
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
-      
-      history.pushState(null, '', id);
+      if (target && id !== '#') { 
+        e.preventDefault(); // Останавливаем стандартный резкий переход
 
-      // Закрываем мобильное меню, если оно активно
-      if (mobileNav && mobileNav.classList.contains('active')) {
-          mobileNav.classList.remove('active');
+        // Закрываем мобильное меню, если оно активно
+        if (mobileNav && mobileNav.classList.contains('active')) {
+            mobileNav.classList.remove('active');
+        }
+        
+        // Выполняем гарантированный плавный скролл
+        smoothScrollToTarget(target);
+        
+        // Обновляем URL, чтобы якорь был виден в строке
+        history.pushState(null, '', id); 
       }
     });
   });
 
-  // Прокрутка при загрузке страницы с хэшем (#id)
+  // При открытии страницы с хэшем (#portfolio)
   window.addEventListener('load', () => {
     const { hash } = window.location;
-    if (hash) {
-      const target = document.querySelector(hash);
-      if (target) {
-          // Плавно прокручиваем к секции при загрузке
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    const target = hash ? document.querySelector(hash) : null;
+    
+    if (target && hash !== '#') {
+      // Даем браузеру секунду, чтобы загрузить все стили и DOM, прежде чем скроллить
+      setTimeout(() => smoothScrollToTarget(target), 10); 
     }
   });
 
@@ -136,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 
-  // === Логика кнопки "Наверх" (Ваш рабочий пример) ===
+  // === Логика кнопки "Наверх" ===
 
   if (scrollTopBtn) {
       const SHOW_AFTER = 300;
