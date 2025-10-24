@@ -4,7 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Aziret Rahmanov - Java Backend Developer Portfolio" />
-  <title>My Portfolio</title>
+  <meta property="og:title" content="Портфолио Азирета Рахманова" />
+  <meta property="og:description" content="Личное портфолио Java Backend разработчика" />
+  <meta property="og:image" content="images/profile_photo.jpg" />
+  <meta property="og:url" content="https://berrring.github.io/<название-вашего-репозитория>" />
+  <meta property="og:type" content="website" />
+  <title>Портфолио Азирета Рахманова</title>
   <link rel="stylesheet" href="style.css"> 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
 </head>
@@ -22,16 +27,16 @@
         <div class="header-content">
           <a href="#" class="logo">Rahmanov</a>
           <div class="header-right">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
               <i id="sunIcon" class="ri ri-sun-line" style="display: none;"></i>
               <i id="moonIcon" class="ri ri-moon-line"></i>
             </button>
             <nav class="nav">
-              <a href="#about" class="nav-link">About</a>
-              <a href="#portfolio" class="nav-link">Portfolio</a>  
-              <a href="#contact" class="nav-link">Contact</a>
+              <a href="#about" class="nav-link">Обо мне</a>
+              <a href="#portfolio" class="nav-link">Портфолио</a>  
+              <a href="#contact" class="nav-link">Контакты</a>
             </nav>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Переключить меню">
               <span></span>
               <span></span>
               <span></span>
@@ -42,24 +47,24 @@
     </header>
 
     <nav class="mobile-nav" id="mobileNav">
-      <a href="#about" class="nav-link">About Me</a>
-      <a href="#portfolio" class="nav-link">Portfolio</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#about" class="nav-link">Обо мне</a>
+      <a href="#portfolio" class="nav-link">Портфолио</a>
+      <a href="#contact" class="nav-link">Контакты</a>
     </nav>
 
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
           <div class="hero-content">
-            <h1>Aziret Rahmanov</h1>
+            <h1>Азирет Рахманов</h1>
             <div class="hero-subtitle">Java Backend Developer</div>
             <p class="hero-description">
-              Creating reliable backend solutions with Java and Spring Boot. 
-              I strive to write clean, readable code and constantly develop in web development.
+              Создаю надёжные backend-решения на Java и Spring Boot. 
+              Стремлюсь писать чистый, читаемый код и постоянно развиваюсь в веб-разработке.
             </p>
             <div class="hero-buttons">
-              <a href="#contact" class="btn btn-primary">Get in Touch</a>
-              <a href="#portfolio" class="btn btn-secondary">View Projects</a>
+              <a href="#contact" class="btn btn-primary">Связаться</a>
+              <a href="#portfolio" class="btn btn-secondary">Посмотреть проекты</a>
             </div>
             <div class="skills">
               <span class="skill-tag">Java</span>
@@ -75,7 +80,7 @@
           <div class="hero-image">
             <div class="profile-card-simple">
               <div class="profile-image-large">
-                <img src="images/profile_photo.jpg" alt="Aziret Rahmanov">
+                <img src="images/profile_photo.jpg" alt="Азирет Рахманов" loading="lazy">
               </div>
             </div>
           </div>
@@ -85,29 +90,29 @@
 
     <section id="about" class="section about">
       <div class="container">
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title">Обо мне</h2>
         <div class="about-grid">
           <div class="about-text">
-            <p>I am a beginner Java backend developer with a passion for creating efficient and scalable solutions. I study modern technologies and best practices of software development.</p>
-            <p>Focused on learning the Spring Framework, working with databases and creating RESTful APIs. Actively developing in the direction of DevOps and automation.</p>
-            <p>I learn quickly, love solving complex problems and am ready for teamwork on interesting projects. Currently expanding my skills in frontend development.</p>
+            <p>Я начинающий Java backend разработчик с энтузиазмом к созданию эффективных и масштабируемых решений.</p>
+            <p>Сфокусирован на изучении Spring Framework, работе с базами данных и создании RESTful API.</p>
+            <p>Быстро учусь, люблю решать сложные задачи и готов к командной работе над интересными проектами.</p>
           </div>
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-number">8</div>
-              <div class="stat-label">Projects</div>
+              <div class="stat-label">Проектов</div>
             </div>
             <div class="stat-card">
               <div class="stat-number">15</div>
-              <div class="stat-label">Technologies</div>
+              <div class="stat-label">Технологий</div>
             </div>
             <div class="stat-card">
               <div class="stat-number">2025</div>
-              <div class="stat-label">Started</div>
+              <div class="stat-label">Начало</div>
             </div>
             <div class="stat-card">
               <div class="stat-number">100%</div>
-              <div class="stat-label">Dedication</div>
+              <div class="stat-label">Самоотдача</div>
             </div>
           </div>
         </div>
@@ -116,15 +121,15 @@
 
     <section id="portfolio" class="section">
       <div class="container">
-        <h2 class="section-title">My Projects</h2>
+        <h2 class="section-title">Мои проекты</h2>
         <div class="projects-grid">
           <article class="project-card">
             <div class="project-image">
-              <img src="images/firstproject_photo.png" alt="Task Management API">
+              <img src="images/firstproject_photo.png" alt="Task Management API" loading="lazy">
             </div>
             <div class="project-content">
               <h3 class="project-title">Task Management API</h3>
-              <p class="project-description">RESTful API for task management with JWT authentication and PostgreSQL integration.</p>
+              <p class="project-description">RESTful API для управления задачами с JWT-авторизацией и интеграцией с PostgreSQL.</p>
               <div class="project-tech">
                 <span class="tech-tag">Spring Boot</span>
                 <span class="tech-tag">PostgreSQL</span>
@@ -132,16 +137,17 @@
               </div>
               <div class="project-links">
                 <a href="https://github.com/berrring/TM_1" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                <a href="https://berrring.github.io/TM_1" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
               </div>
             </div>
           </article>
           <article class="project-card">
             <div class="project-image">
-              <img src="images/secondproject_photo.png" alt="E-commerce Backend">
+              <img src="images/secondproject_photo.png" alt="E-commerce Backend" loading="lazy">
             </div>
             <div class="project-content">
               <h3 class="project-title">E-commerce Backend</h3>
-              <p class="project-description">Microservice architecture for online store with user, product and order services.</p>
+              <p class="project-description">Микросервисная архитектура для интернет-магазина с сервисами для пользователей, продуктов и заказов.</p>
               <div class="project-tech">
                 <span class="tech-tag">Spring Cloud</span>
                 <span class="tech-tag">Docker</span>
@@ -149,16 +155,17 @@
               </div>
               <div class="project-links">
                 <a href="https://github.com/berrring/E_M1" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                <a href="https://berrring.github.io/E_M1" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
               </div>
             </div>
           </article>
           <article class="project-card">
             <div class="project-image">
-              <img src="images/thirdproject_photo.png" alt="Blog API">
+              <img src="images/thirdproject_photo.png" alt="Blog API" loading="lazy">
             </div>
             <div class="project-content">
               <h3 class="project-title">Personal Blog API</h3>
-              <p class="project-description">REST API for a blogging platform with authentication and content management.</p>
+              <p class="project-description">REST API для блог-платформы с авторизацией и управлением контентом.</p>
               <div class="project-tech">
                 <span class="tech-tag">Spring Boot</span>
                 <span class="tech-tag">MySQL</span>
@@ -166,6 +173,7 @@
               </div>
               <div class="project-links">
                 <a href="https://github.com/berrring/B_P" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                <a href="https://berrring.github.io/B_P" target="_blank" rel="noopener noreferrer" class="project-link">Live Demo</a>
               </div>
             </div>
           </article>
@@ -175,26 +183,26 @@
 
     <section id="contact" class="section contact">
       <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
+        <h2 class="section-title">Связаться со мной</h2>
         <div class="contact-wrapper">
           <form class="contact-form" id="contactForm">
             <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required placeholder="Ilia Topuria">
+              <label for="name">Ваше имя</label>
+              <input type="text" id="name" name="name" required placeholder="Илья Топурия">
             </div>
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" id="email" name="email" required placeholder="ilia@example.com">
             </div>
             <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" required placeholder="Project Inquiry">
+              <label for="subject">Тема</label>
+              <input type="text" id="subject" name="subject" required placeholder="Запрос по проекту">
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+              <label for="message">Сообщение</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Расскажите о вашем проекте..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+            <button type="submit" class="btn btn-primary btn-full">Отправить сообщение</button>
             <div class="form-status" id="formStatus"></div>
           </form>
         </div>
@@ -205,14 +213,21 @@
       <div class="container">
         <div class="footer-content">
           <div class="footer-info">
-            <p>&copy; 2025 Aziret Rahmanov. All rights reserved.</p>
-          </div>
+            <p>&copy; 2025 Азирет Рахманов. Все права защищены.</p>
+            <p class="email-contact">
+              Email: <span class="email-text">aziret.rahmanov@example.com</span>
+              <i class="ri ri-file-copy-line copy-icon" data-email="aziret.rahmanov@example.com" aria-label="Скопировать email" role="button" tabindex="0"></i>
+            </p>
+          </div> 
           <div class="social-links">
-            <a href="https://github.com/yourprofile" class="social-link" aria-label="GitHub">
+            <a href="https://github.com/berrring" class="social-link" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
               <i class="ri ri-github-fill"></i>
             </a>
-            <a href="https://discord.gg/yourprofile" class="social-link" aria-label="Discord">
+            <a href="https://discord.gg/yourprofile" class="social-link" aria-label="Discord" target="_blank" rel="noopener noreferrer">
               <i class="ri ri-discord-fill"></i>
+            </a>
+            <a href="https://t.me/yourtelegram" class="social-link" aria-label="Telegram" target="_blank" rel="noopener noreferrer">
+              <i class="ri ri-telegram-fill"></i>
             </a>
           </div>
         </div>
@@ -220,7 +235,7 @@
     </footer>
   </div>
 
-  <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll to top">
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Прокрутить наверх">
     <i class="ri ri-arrow-up-line"></i>
   </button>
 
