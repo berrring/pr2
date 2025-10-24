@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const sunIcon = document.getElementById('sunIcon');
   const moonIcon = document.getElementById('moonIcon');
   const html = document.documentElement;
+  const mobileNav = document.getElementById('mobileNav'); // Определяем здесь для использования в Listener
 
   // Функция для установки иконок
   function updateThemeIcons() {
@@ -20,22 +21,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Инициализация иконок темы (при первой загрузке)
   if (!html.getAttribute('data-theme')) {
-      // Установка начальной темы, если не задана
       html.setAttribute('data-theme', 'dark'); 
   }
   updateThemeIcons();
 
   // Мобильное меню
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-  const mobileNav = document.getElementById('mobileNav');
 
   mobileMenuToggle.addEventListener('click', function() {
     mobileNav.classList.toggle('active');
   });
 
+  // ПЛАВНЫЙ СКРОЛЛ: Оставляем только закрытие мобильного меню
   mobileNav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       mobileNav.classList.remove('active');
+      // Браузер сам обрабатывает скролл плавно через CSS
+    });
+  });
+  
+  // ПЛАВНЫЙ СКРОЛЛ: Для десктопной навигации делаем то же самое
+  document.querySelectorAll('.nav a.nav-link[href^="#"]').forEach(link => {
+    link.addEventListener('click', () => {
+        // Браузер сам обрабатывает скролл плавно через CSS
+        // Никаких preventDefault и scrollIntoView!
     });
   });
 
@@ -75,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function proceedToSite() {
     greetingBlock.classList.add('hidden');
-    // Убираем блок приветствия полностью после завершения анимации
     setTimeout(() => {
       greetingBlock.style.display = 'none';
     }, 600);
@@ -93,60 +101,34 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (g && btn && greetingBlock && mainContent) {
-    // ВАЖНОЕ ИСПРАВЛЕНИЕ: Блок mainContent не скрывается здесь, 
-    // он виден, но перекрыт блоком greetingBlock.
     greetingBlock.style.display = 'flex';
     
     const savedName = localStorage.getItem('visitorName');
     showGreeting(savedName);
     
     if (savedName) {
-      // Если имя есть, автоматически переходим на сайт
       setTimeout(proceedToSite, 1500);
     } else {
-      // Если имени нет, ждем клика
       btn.addEventListener('click', askName);
     }
   }
 
-  // Плавная прокрутка (работает в паре с CSS scroll-margin-top)
-  document.querySelectorAll('a.nav-link[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const id = link.getAttribute('href');
-      const target = document.querySelector(id);
-      if (!target) return;
-      
-      e.preventDefault();
-      
-      // Используем scrollIntoView для плавного скролла
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Обновляем URL (по желанию)
-      history.pushState(null, '', id); 
-      
-      // Закрываем мобильное меню, если оно активно
-      if (mobileNav.classList.contains('active')) {
-          mobileNav.classList.remove('active');
-      }
-    });
-  });
-
-  // При открытии страницы с хэшем (#about) — плавно скроллим к секции
+  // При открытии страницы с хэшем: УДАЛЯЕМ JS-СКРОЛЛ!
   window.addEventListener('load', () => {
     const { hash } = window.location;
     if (hash) {
       const target = document.querySelector(hash);
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (target) {
+        // УДАЛЕНО: target.scrollIntoView({ behavior: 'smooth', block: 'start' }); 
+        // Браузер выполнит переход по якорю плавно благодаря CSS
+      }
     }
   });
 
   // Кнопка «Наверх»
   const scrollTopBtn = document.getElementById('scrollTopBtn');
-
-  // Порог появления (в пикселях)
   const SHOW_AFTER = 300;
 
-  // Следим за прокруткой и показываем/скрываем кнопку
   window.addEventListener('scroll', () => {
     if (scrollTopBtn) {
         if (window.scrollY > SHOW_AFTER) {
@@ -157,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Плавно прокручиваем к началу страницы
   if (scrollTopBtn) {
       scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
