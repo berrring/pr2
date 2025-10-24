@@ -93,11 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (g && btn && greetingBlock && mainContent) {
-    // ВАЖНОЕ ИСПРАВЛЕНИЕ: Мы не скрываем mainContent здесь, 
-    // так как он уже должен быть видим по умолчанию, а 
-    // greetingBlock его перекрывает.
-    
-    // Показываем блок приветствия
+    // ВАЖНОЕ ИСПРАВЛЕНИЕ: Блок mainContent не скрывается здесь, 
+    // он виден, но перекрыт блоком greetingBlock.
     greetingBlock.style.display = 'flex';
     
     const savedName = localStorage.getItem('visitorName');
@@ -139,8 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const { hash } = window.location;
     if (hash) {
       const target = document.querySelector(hash);
-      // Убеждаемся, что скролл происходит после полной загрузки и 
-      // учитывается фиксированный хедер (благодаря scroll-margin-top)
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
