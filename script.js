@@ -96,14 +96,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Плавная прокрутка для якорей
+  document.querySelectorAll('a.nav-link[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', id);
+    });
+  });
+
   // Кнопка "Наверх"
-  const scrollTopBtn = document.getElementById('scrollTop');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
-      scrollTopBtn.classList.add('visible');
+      scrollTopBtn.classList.add('show');
     } else {
-      scrollTopBtn.classList.remove('visible');
+      scrollTopBtn.classList.remove('show');
     }
   });
 
