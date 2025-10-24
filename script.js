@@ -1,12 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Переключение темы
+  // === Переменные и элементы ===
   const themeToggle = document.getElementById('themeToggle');
   const sunIcon = document.getElementById('sunIcon');
   const moonIcon = document.getElementById('moonIcon');
   const html = document.documentElement;
-  const mobileNav = document.getElementById('mobileNav'); // Определяем здесь для использования в Listener
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  const g = document.getElementById('greeting');
+  const btn = document.getElementById('askName');
+  const greetingBlock = document.getElementById('greetingBlock');
+  const mainContent = document.getElementById('mainContent');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  const header = document.querySelector('.header');
+  
+  // Высота хедера для смещения скролла (80px - высота, заданная в CSS)
+  const HEADER_OFFSET = header ? header.offsetHeight : 80;
 
-  // Функция для установки иконок
+
+  // === Функции и логика темы ===
+
   function updateThemeIcons() {
     const isLight = html.getAttribute('data-theme') === 'light';
     sunIcon.style.display = isLight ? 'inline' : 'none';
@@ -19,38 +33,110 @@ document.addEventListener('DOMContentLoaded', function() {
     updateThemeIcons();
   });
 
-  // Инициализация иконок темы (при первой загрузке)
   if (!html.getAttribute('data-theme')) {
       html.setAttribute('data-theme', 'dark'); 
   }
   updateThemeIcons();
 
-  // Мобильное меню
-  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 
-  mobileMenuToggle.addEventListener('click', function() {
-    mobileNav.classList.toggle('active');
-  });
+  // === Логика мобильного меню ===
 
-  // ПЛАВНЫЙ СКРОЛЛ: Оставляем только закрытие мобильного меню
-  mobileNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileNav.classList.remove('active');
-      // Браузер сам обрабатывает скролл плавно через CSS
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', function() {
+      mobileNav.classList.toggle('active');
+    });
+  }
+
+
+  // === Логика приветствия (Greeting Block) ===
+
+  function showGreeting(name) {
+    g.textContent = name ? `Привет, ${name}!` : 'Добро пожаловать!';
+  }
+
+  function proceedToSite() {
+    greetingBlock.classList.add('hidden');
+    setTimeout(() => {
+      greetingBlock.style.display = 'none';
+    }, 600);
+  }
+
+  function askName() {
+    const name = prompt('Как тебя зовут?');
+    if (name && name.trim()) {
+      localStorage.setItem('visitorName', name.trim());
+    } else {
+      localStorage.removeItem('visitorName');
+    }
+    showGreeting(localStorage.getItem('visitorName'));
+    proceedToSite();
+  }
+
+  if (g && btn && greetingBlock) {
+    greetingBlock.style.display = 'flex';
+    
+    const savedName = localStorage.getItem('visitorName');
+    showGreeting(savedName);
+    
+    if (savedName) {
+      setTimeout(proceedToSite, 1500);
+    } else {
+      btn.addEventListener('click', askName);
+    }
+  }
+
+
+  // === ГАРАНТИРОВАННЫЙ ПЛАВНЫЙ СКРОЛЛ (Исправление) ===
+
+  function smoothScrollToTarget(target) {
+      if (!target) return;
+      
+      // Вычисляем позицию: позиция элемента относительно верха документа
+      // минус высота фиксированного хедера
+      const targetPosition = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+
+      window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth' 
+      });
+  }
+
+  // Обработчики для всех якорных ссылок (меню и мобильное меню)
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      const target = document.querySelector(id);
+      
+      if (target && id !== '#') { 
+        e.preventDefault(); // Останавливаем стандартный резкий переход
+
+        // Закрываем мобильное меню, если оно активно
+        if (mobileNav && mobileNav.classList.contains('active')) {
+            mobileNav.classList.remove('active');
+        }
+        
+        // Выполняем гарантированный плавный скролл
+        smoothScrollToTarget(target);
+        
+        // Обновляем URL, чтобы якорь был виден в строке
+        history.pushState(null, '', id); 
+      }
     });
   });
-  
-  // ПЛАВНЫЙ СКРОЛЛ: Для десктопной навигации делаем то же самое
-  document.querySelectorAll('.nav a.nav-link[href^="#"]').forEach(link => {
-    link.addEventListener('click', () => {
-        // Браузер сам обрабатывает скролл плавно через CSS
-        // Никаких preventDefault и scrollIntoView!
-    });
+
+  // При открытии страницы с хэшем (#portfolio)
+  window.addEventListener('load', () => {
+    const { hash } = window.location;
+    const target = hash ? document.querySelector(hash) : null;
+    
+    if (target && hash !== '#') {
+      // Даем браузеру секунду, чтобы загрузить все стили и DOM, прежде чем скроллить
+      setTimeout(() => smoothScrollToTarget(target), 10); 
+    }
   });
 
-  // Форма
-  const contactForm = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
+
+  // === Логика формы обратной связи ===
 
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -72,74 +158,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Персональное приветствие
-  const g = document.getElementById('greeting');
-  const btn = document.getElementById('askName');
-  const greetingBlock = document.getElementById('greetingBlock');
-  const mainContent = document.getElementById('mainContent');
 
-  function showGreeting(name) {
-    g.textContent = name ? `Привет, ${name}!` : 'Добро пожаловать!';
-  }
-
-  function proceedToSite() {
-    greetingBlock.classList.add('hidden');
-    setTimeout(() => {
-      greetingBlock.style.display = 'none';
-    }, 600);
-  }
-
-  function askName() {
-    const name = prompt('What is your name?');
-    if (name && name.trim()) {
-      localStorage.setItem('visitorName', name.trim());
-    } else {
-      localStorage.removeItem('visitorName');
-    }
-    showGreeting(localStorage.getItem('visitorName'));
-    proceedToSite();
-  }
-
-  if (g && btn && greetingBlock && mainContent) {
-    greetingBlock.style.display = 'flex';
-    
-    const savedName = localStorage.getItem('visitorName');
-    showGreeting(savedName);
-    
-    if (savedName) {
-      setTimeout(proceedToSite, 1500);
-    } else {
-      btn.addEventListener('click', askName);
-    }
-  }
-
-
-  window.addEventListener('load', () => {
-    const { hash } = window.location;
-    if (hash) {
-      const target = document.querySelector(hash);
-      if (target) {
-      
-      }
-    }
-  });
-
-  const scrollTopBtn = document.getElementById('scrollTopBtn');
-  const SHOW_AFTER = 300;
-
-  window.addEventListener('scroll', () => {
-    if (scrollTopBtn) {
-        if (window.scrollY > SHOW_AFTER) {
-          scrollTopBtn.classList.add('show');
-        } else {
-          scrollTopBtn.classList.remove('show');
-        }
-    }
-  });
+  // === Логика кнопки "Наверх" ===
 
   if (scrollTopBtn) {
+      const SHOW_AFTER = 300;
+
+      window.addEventListener('scroll', () => {
+          if (window.scrollY > SHOW_AFTER) {
+            scrollTopBtn.classList.add('show');
+          } else {
+            scrollTopBtn.classList.remove('show');
+          }
+      });
+
       scrollTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
       });
   }
 });
