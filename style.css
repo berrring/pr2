@@ -28,9 +28,8 @@
   padding: 0;
 }
 
-/* Удаляем scroll-behavior: smooth, так как скролл теперь управляется JS */
 html {
-  /* scroll-behavior: smooth; */ 
+  /* scroll-behavior: smooth; */
 }
 
 body {
@@ -260,7 +259,6 @@ body {
   width: 100%;
 }
 
-/* СТИЛЬ ДЛЯ БОЛЬШОГО КРУГЛОГО ФОТО */
 .hero-image {
   display: flex;
   justify-content: center;
@@ -278,7 +276,7 @@ body {
 .profile-image-large {
   width: 300px;
   height: 300px;
-  border-radius: 50%; /* <-- Делает идеально круглым */
+  border-radius: 50%;
   margin: 0 auto;
   overflow: hidden;
   border: 5px solid var(--accent);
@@ -287,8 +285,8 @@ body {
 }
 
 .profile-image-large:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(217, 119, 6, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 0 0 10px rgba(217, 119, 6, 0.2);
 }
 
 .profile-image-large img {
@@ -296,7 +294,6 @@ body {
   height: 100%;
   object-fit: cover;
 }
-/* КОНЕЦ СТИЛЯ КРУГЛОГО ФОТО */
 
 .skills {
   display: flex;
@@ -317,8 +314,6 @@ body {
 .section {
   padding: 80px 0;
 }
-
-
 
 .section-title {
   font-size: clamp(32px, 6vw, 48px);
@@ -461,6 +456,12 @@ body {
   color: var(--accent-hover);
 }
 
+.project-link.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .contact {
   background: var(--bg-secondary);
 }
@@ -548,6 +549,64 @@ body {
   gap: 24px;
 }
 
+.footer-info a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-info a:hover {
+  color: var(--accent-hover);
+}
+
+.email-contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+}
+
+.email-text {
+  font-weight: 500;
+}
+
+.copy-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.copy-icon:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.copy-icon i {
+  font-size: 16px;
+}
+
+.copy-feedback {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #10B981;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copy-feedback.show {
+  opacity: 1;
+}
+
 .social-links {
   display: flex;
   gap: 16px;
@@ -583,7 +642,6 @@ body {
   color: white;
 }
 
-/* Кнопка "Наверх" */
 .scroll-top {
   position: fixed;
   bottom: 32px;
@@ -711,7 +769,7 @@ body {
   flex-direction: column;
   gap: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  z-index: 999; /* Ниже хедера */
+  z-index: 999;
 }
 
 .mobile-nav.active {
