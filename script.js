@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Плавная прокрутка для якорей
+  // Плавная прокрутка без подсветки активного пункта
   document.querySelectorAll('a.nav-link[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href');
@@ -108,41 +108,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Кнопка "Наверх"
+  // При открытии страницы с хэшем (#about) — плавно скроллим к секции
+  window.addEventListener('load', () => {
+    const { hash } = window.location;
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
+  // Кнопка «Наверх»
   const scrollTopBtn = document.getElementById('scrollTopBtn');
 
+  // Порог появления (в пикселях)
+  const SHOW_AFTER = 300;
+
+  // Следим за прокруткой и показываем/скрываем кнопку
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
+    if (window.scrollY > SHOW_AFTER) {
       scrollTopBtn.classList.add('show');
     } else {
       scrollTopBtn.classList.remove('show');
     }
   });
 
+  // Плавно прокручиваем к началу страницы
   scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-
-  // Анимация появления карточек
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.project-card, .stat-card, .hero-card').forEach(card => {
-    observer.observe(card);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
